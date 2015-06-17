@@ -2,8 +2,11 @@ package pl.szkolenie.projekty.threadtest;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 
 
@@ -65,7 +68,27 @@ public class MainActivity extends ActionBarActivity {
 
         t10 = new ThreadTest(numberPicker3, ThreadTest.RunAsEnum.Forward);
         t10.start();
+        CheckBox cb = (CheckBox) findViewById(R.id.ActiveCheck);
+        cb.setChecked(true);
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    try {
+                        t1.Enabled = true;
+                    } catch (Exception e) {
+                        Log.d("apka1", e.getMessage());
 
+                    }
+                } else {
+                    try {
+                        t1.Enabled = false;
+                    } catch (Exception e) {
+                        Log.d("apka1", e.getMessage());
+                    }
+                }
+            }
+        });
 
     }
 

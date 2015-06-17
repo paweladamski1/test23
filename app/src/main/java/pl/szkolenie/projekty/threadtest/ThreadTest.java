@@ -1,11 +1,13 @@
 package pl.szkolenie.projekty.threadtest;
 
 
+import android.util.Log;
 import android.widget.NumberPicker;
 
 public class ThreadTest extends Thread {
 
     public boolean activ = true;
+    public boolean Enabled = true;
     RunAsEnum runAs;
     int value, sleepValue = 500;
     private NumberPicker view;
@@ -21,22 +23,24 @@ public class ThreadTest extends Thread {
     public void run() {
         value = 0;
         while (activ) {
-            if (runAs == RunAsEnum.Forward) {
-                value++;
-                if (value > view.getMaxValue())
-                    value = view.getMinValue();
-            } else {
-                value--;
-                if (value < view.getMinValue())
-                    value = view.getMaxValue();
-            }
-
-            MainActivity.This.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    view.setValue(value);
+            if (Enabled) {
+                if (runAs == RunAsEnum.Forward) {
+                    value++;
+                    if (value > view.getMaxValue())
+                        value = view.getMinValue();
+                } else {
+                    value--;
+                    if (value < view.getMinValue())
+                        value = view.getMaxValue();
                 }
-            });
+
+                MainActivity.This.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setValue(value);
+                    }
+                });
+            }
 
             try {
                 Thread.sleep(sleepValue);
@@ -44,6 +48,14 @@ public class ThreadTest extends Thread {
 
             }
         }
+        Log.d("apka1", "koniec watku");
+    }
+
+    @Override
+    public synchronized void start() {
+        activ = true;
+        super.start();
+
     }
 
     public void SetSleepValue(int newValue) {

@@ -55,4 +55,14 @@
         android:layout_marginBottom="73dp"
         android:layout_toLeftOf="@+id/np2"
         android:layout_toStartOf="@+id/np2" />
+
+    <CheckBox
+        android:id="@+id/ActiveCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/numberPicker1"
+        android:checked="false"
+        android:text="New CheckBox" />
 </RelativeLayout>
