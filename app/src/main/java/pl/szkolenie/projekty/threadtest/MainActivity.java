@@ -11,7 +11,7 @@ public class MainActivity extends ActionBarActivity {
 
     static public NumberPicker numberPicker1, numberPicker2, numberPicker3, np1, np2, np3;
     static public MainActivity This;
-    ThreadTest t1, t2, t3;
+    ThreadTest t1, t2, t4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         np3.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                t3.SetSleepValue(newVal);
+                t4.SetSleepValue(newVal);
             }
         });
         t1 = new ThreadTest(numberPicker1, ThreadTest.RunAsEnum.Forward);
@@ -63,8 +63,8 @@ public class MainActivity extends ActionBarActivity {
         t2 = new ThreadTest(numberPicker2, ThreadTest.RunAsEnum.Backward);
         t2.start();
 
-        t3 = new ThreadTest(numberPicker3, ThreadTest.RunAsEnum.Forward);
-        t3.start();
+        t4 = new ThreadTest(numberPicker3, ThreadTest.RunAsEnum.Forward);
+        t4.start();
 
 
     }
